@@ -99,4 +99,7 @@ public class Duty {
 		this.employee = employee;
 	}
 
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
 }
