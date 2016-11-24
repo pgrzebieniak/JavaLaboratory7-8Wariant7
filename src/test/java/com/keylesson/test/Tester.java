@@ -2,6 +2,7 @@ package com.keylesson.test;
 
 import java.util.Date;
 
+import com.keylesson.persistence.Employee;
 import org.hibernate.Session;
 
 import com.keylesson.persistence.Customer;
@@ -14,25 +15,26 @@ public class Tester {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
 			session.beginTransaction();
-			// Create customer
-			Customer customer = new Customer("Mlle", "Khadija");
 
-			// Create two orders
-			Duty order1 = new Duty("X111", new Float("150.13"), new Date());
-			Duty order2 = new Duty("Y222", new Float("300.10"), new Date());
+			Employee employee = new Employee("kowalski","Jan");
 
-			// Set orders in customer
-			customer.getOrders().add(order1);
-			customer.getOrders().add(order2);
-			// Set customer in orders
-			order1.setCustomer(customer);
-			order2.setCustomer(customer);
 
-			// Save customer
-			session.save(customer);
-			// Save orders
-			session.save(order1);
-			session.save(order2);
+			Duty duty1 = new Duty(2,"styczeń",10,19,2008);
+			Duty duty2 = new Duty(3,"luty",10,19,2008);
+
+
+			employee.getDuty().add(duty1);
+			employee.getDuty().add(duty2);
+
+			duty1.setEmployee(employee);
+			duty2.setEmployee(employee);
+
+
+			session.save(employee);
+
+			
+			session.save(employee);
+			session.save(employee);
 			session.getTransaction().commit();
 		} catch (Exception e) {
 			System.err.println("Error :" + e);
